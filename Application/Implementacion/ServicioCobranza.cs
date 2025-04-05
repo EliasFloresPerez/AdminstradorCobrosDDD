@@ -1,0 +1,107 @@
+using Domain.Entidades;
+
+using Application.Abstracto;
+using Application.Dtos;
+using Application.Base;
+using Domain.Abstracto;
+using Domain.Repositorios;
+
+
+namespace Application.Implementacion
+{
+    public class ServicioCobranza : IServicioCobranza
+    {
+        
+        private readonly IUnitOfWork _unitOfWork;
+
+        private readonly IRepositorioCliente _IRepositorioCliente;
+
+        private readonly IRepositorioInfCobro _IRepositorioInfCobro;
+        public ServicioCobranza(IRepositorioCliente IRepositorioCliente, IUnitOfWork unitOfWork, IRepositorioInfCobro IRepositorioInfCobro)
+        {
+            _IRepositorioCliente = IRepositorioCliente;
+            _unitOfWork = unitOfWork;
+            _IRepositorioCliente = IRepositorioCliente;
+            _IRepositorioInfCobro = IRepositorioInfCobro;
+        }
+
+
+        public async Task<CResponse> AgregarInformacionCobroAsync(LinkDePago infoCobroDto)
+        {
+            
+            Cliente cliente = new Cliente();
+
+            //Verificamos que el nombre no exista en la base de datos
+            cliente = await _IRepositorioCliente.ObtenerPorNombreAsync(infoCobroDto.Nombre);
+            if (cliente == null)
+            {
+                //Creamos la entidad cliente
+                cliente = new Cliente()
+                {
+                    Nombre = infoCobroDto.Nombre,
+                    InformacionesCobro = new List<InformacionCobro>()
+                };
+            }
+
+            // A Este cliente se le agrega la informacion de cobro
+            
+            InformacionCobro infocobro =  new InformacionCobro(){
+                Descripcion = infoCobroDto.Motivo,
+                Total = infoCobroDto.Monto,
+            };
+
+            cliente.InformacionesCobro.Add(infocobro);
+
+            // Guardamos el cliente y la informacion de cobro en la base de datos
+            _IRepositorioCliente.Agregar(cliente);
+            await _unitOfWork.CommitAsync();
+
+            return new CResponse { statusCode = 200, message = "Informacion de cobro agregada correctamente." };
+        }
+
+        //Dado un Id de Informacion de cobro, eliminamos la informacion de cobro
+        public async Task<CResponse> EliminarInformacionCobroAsync(Guid idInformacionCobro)
+        {
+            // Buscamos la informacion de cobro por su Id
+            InformacionCobro? infoCobro = await _IRepositorioInfCobro.ObtenerPorIdAsync(idInformacionCobro);
+
+            if (infoCobro != null)
+            {
+                // Eliminamos la informacion de cobro
+                _IRepositorioInfCobro.Eliminar(infoCobro);
+                await _unitOfWork.CommitAsync();
+
+                return new CResponse { statusCode = 200, message = "Informacion de cobro eliminada correctamente." };
+            }
+            else
+            {
+                return new CResponse { statusCode = 404, message = "Informacion de cobro no encontrada." };
+            }
+        }
+
+        //Dado un nombre de cliente, buscamos la informacion de cobro
+        public async Task<List<LinksTotal>> ObtenerInformacionCobroPorNombreAsync(string nombre)
+        {
+            // Buscamos el cliente por su nombre
+            Cliente? cliente = await _IRepositorioCliente.ObtenerPorNombreAsync(nombre);
+
+            if (cliente != null)
+            {
+                // Obtenemos la informacion de cobro del cliente
+                List<LinksTotal> linksTotal = new List<LinksTotal>();
+                foreach (var infoCobro in cliente.InformacionesCobro)
+                {
+                    linksTotal.Add(new LinksTotal { Id = infoCobro.Id, Monto = infoCobro.Total, Motivo = infoCobro.Descripcion });
+                }
+                return linksTotal;
+            }
+            else
+            {
+                return new List<LinksTotal>();
+            }
+    
+
+        }
+    }
+}
+        

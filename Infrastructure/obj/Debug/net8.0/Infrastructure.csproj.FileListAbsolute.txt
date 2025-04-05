@@ -1,0 +1,17 @@
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\bin\Debug\net8.0\Infrastructure.deps.json
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\bin\Debug\net8.0\Infrastructure.dll
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\bin\Debug\net8.0\Infrastructure.pdb
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\bin\Debug\net8.0\Application.dll
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\bin\Debug\net8.0\Domain.dll
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\bin\Debug\net8.0\Domain.pdb
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\bin\Debug\net8.0\Application.pdb
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\obj\Debug\net8.0\Infrastructure.csproj.AssemblyReference.cache
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\obj\Debug\net8.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\obj\Debug\net8.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\obj\Debug\net8.0\Infrastructure.AssemblyInfo.cs
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\obj\Debug\net8.0\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\obj\Debug\net8.0\Infrastructure.csproj.CopyComplete
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\obj\Debug\net8.0\Infrastructure.dll
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\obj\Debug\net8.0\refint\Infrastructure.dll
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\obj\Debug\net8.0\Infrastructure.pdb
+C:\Users\elias\source\repos\ProyectoTecnico\Infrastructure\obj\Debug\net8.0\ref\Infrastructure.dll
