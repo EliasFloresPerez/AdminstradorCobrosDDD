@@ -139,3 +139,4 @@ C:\Users\elias\source\repos\ProyectoTecnico\Web.API\obj\Debug\net8.0\refint\Web.
 C:\Users\elias\source\repos\ProyectoTecnico\Web.API\obj\Debug\net8.0\Web.API.pdb
 C:\Users\elias\source\repos\ProyectoTecnico\Web.API\obj\Debug\net8.0\Web.API.genruntimeconfig.cache
 C:\Users\elias\source\repos\ProyectoTecnico\Web.API\obj\Debug\net8.0\ref\Web.API.dll
+C:\Users\elias\source\repos\ProyectoTecnico\Web.API\obj\Debug\net8.0\Web.API.sourcelink.json

@@ -18,7 +18,7 @@ namespace Infrastructure.Repositorio
         public async Task<IEnumerable<InformacionCobro>> ObtenerPorClienteIdAsync(Guid clienteId)
         {
             return await _dbContext.Set<InformacionCobro>()
-                .Where(c => c.ClienteId == clienteId)
+                .Where(c => c.ClienteId == clienteId && c.Estado == true)
                 .ToListAsync();
         }
     }

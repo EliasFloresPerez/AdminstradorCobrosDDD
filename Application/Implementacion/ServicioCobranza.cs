@@ -2,7 +2,7 @@ using Domain.Entidades;
 
 using Application.Abstracto;
 using Application.Dtos;
-using Application.Base;
+
 using Domain.Abstracto;
 using Domain.Repositorios;
 
@@ -28,6 +28,13 @@ namespace Application.Implementacion
 
         public async Task<CResponse> AgregarInformacionCobroAsync(LinkDePago infoCobroDto)
         {
+
+            //Validamos que el Monto no sea menor a 0
+            if (infoCobroDto.Monto < 0)
+            {
+                return new CResponse { statusCode = 400, message = "El monto no puede ser menor a 0." };
+            }
+
             
             Cliente? cliente = new Cliente();
             bool existeCliente = true;
@@ -73,8 +80,9 @@ namespace Application.Implementacion
 
             if (infoCobro != null)
             {
-                // Eliminamos la informacion de cobro
-                _IRepositorioInfCobro.Eliminar(infoCobro);
+                // Cambiamos el estado a false
+                infoCobro.Estado = false;
+                //_IRepositorioInfCobro.Eliminar(infoCobro);
                 await _unitOfWork.CommitAsync();
 
                 return new CResponse { statusCode = 200, message = "Informacion de cobro eliminada correctamente." };
@@ -108,6 +116,7 @@ namespace Application.Implementacion
 
                     foreach (var item in infoCobro)
                     {
+
                         linksTotal.Add(new LinksTotal()
                         {
                             Nombre = cliente.Nombre,

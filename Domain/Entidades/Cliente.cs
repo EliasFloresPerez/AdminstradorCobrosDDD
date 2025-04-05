@@ -8,6 +8,9 @@ namespace Domain.Entidades
         public Guid Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
 
+        //Informacion de Estado y Fecha de Creacion
+        public DateTime FechaCreacion { get; set; } = DateTime.UtcNow;
+        public bool Estado { get; set; } = true;
 
         // Relación uno a muchos con InformacionCobro
         public virtual ICollection<InformacionCobro> InformacionesCobro { get;  set; } = new List<InformacionCobro>();

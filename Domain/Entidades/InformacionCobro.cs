@@ -14,5 +14,10 @@ namespace Domain.Entidades
         // Relación con Cliente
         public Guid ClienteId { get; set; }  // Clave foránea
         public virtual Cliente? Cliente { get; set; }  // Navegación inversa
+
+        //Fecha de estado y creación
+        public DateTime FechaCreacion { get; set; } = DateTime.UtcNow;
+        public bool Estado { get; set; } = true;
+        
     }
 }

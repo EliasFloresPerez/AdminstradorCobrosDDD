@@ -12,31 +12,34 @@ namespace Web.API.Controladores;
 public class FichaDePagoController : ControllerBase
 {
    
-    private readonly IServicioCobranza _repositorioInfCobro;
+    private readonly IServicioCobranza _servicioCobranza;
 
-    public FichaDePagoController(IServicioCobranza repositorioInfCobro)
+    public FichaDePagoController(IServicioCobranza servicioCobranza)
     {
-        _repositorioInfCobro = repositorioInfCobro;
+        _servicioCobranza = servicioCobranza;
     }
 
     [HttpPost("AgregarInformacionCobro")]
 
-    public async Task<IActionResult> AgregarInformacionCobro([FromBody] LinkDePago infoCobroDto)
+    public async Task<CResponse> AgregarInformacionCobro([FromBody] LinkDePago infoCobroDto)
     {
-        var response = await _repositorioInfCobro.AgregarInformacionCobroAsync(infoCobroDto);
-        return Ok(response);
+        var response = await _servicioCobranza.AgregarInformacionCobroAsync(infoCobroDto);
+
+        return response;
     }
 
     [HttpDelete("EliminarInformacionCobro/{idInformacionCobro}")]
-    public async Task<IActionResult> EliminarInformacionCobro(Guid idInformacionCobro)
+    public async Task<CResponse> EliminarInformacionCobro(Guid idInformacionCobro)
     {
-        var response = await _repositorioInfCobro.EliminarInformacionCobroAsync(idInformacionCobro);
-        return Ok(response);
+        var response = await _servicioCobranza.EliminarInformacionCobroAsync(idInformacionCobro);
+        
+        return response;
+
     }
     [HttpGet("ObtenerInformacionCobroPorNombre/{nombre}")]
     public async Task<IActionResult> ObtenerInformacionCobroPorNombre(string nombre)
     {
-        var response = await _repositorioInfCobro.ObtenerInformacionCobroPorNombreAsync(nombre);
+        var response = await _servicioCobranza.ObtenerInformacionCobroPorNombreAsync(nombre);
         return Ok(response);
     }
 }

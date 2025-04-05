@@ -27,33 +27,9 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "Moodle Aplicativo API", Version = "v1" });
+    c.SwaggerDoc("v1", new() { Title = "Aplicativo API", Version = "v1" });
 
-    //Boton de autorizacion
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Description = "JWT Authorization ",
-        Name = "Authorization",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer"
-    });
-
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference =  new OpenApiReference
-                {
-                    Type =  ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new  string [] {}
-        }
-    });
+    
         
 });
 
