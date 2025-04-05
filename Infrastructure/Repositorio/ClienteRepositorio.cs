@@ -19,11 +19,11 @@ namespace Infrastructure.Repositorio
             return await _dbContext.Set<Cliente>().ToListAsync();
         }
 
-        public async Task<Cliente> ObtenerPorNombreAsync(string nombre)
+        public async Task<Cliente?> ObtenerPorNombreAsync(string nombre)
         {
-            return await _dbContext.Set<Cliente>().FirstAsync(c => c.Nombre == nombre);
+            return await _dbContext.Set<Cliente>().FirstOrDefaultAsync(c => c.Nombre == nombre);
         }
-    
+
     
         
 

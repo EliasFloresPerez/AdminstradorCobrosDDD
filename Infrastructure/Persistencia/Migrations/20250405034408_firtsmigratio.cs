@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace Infrastructure.Persistence.Migrations
+namespace Infrastructure.Persistencia.Migrations
 {
     /// <inheritdoc />
-    public partial class firtsmigration : Migration
+    public partial class firtsmigratio : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

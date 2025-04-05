@@ -7,7 +7,8 @@ using Domain.Repositorios;
 using Infrastructure.Repositorio;
 using Infrastructure.Base;
 using Domain.Abstracto;
-
+using Application.Abstracto;
+using Application.Implementacion;
 
 using Infrastructure.Persistencia;
 
@@ -23,13 +24,17 @@ public static class InyeccionDeDependencias
                 b => b.MigrationsAssembly(typeof(AplicacionDbContext).Assembly.FullName)));
 
         
+
+        //De Infraestructura
         services.AddScoped<IDbContext>(sp => sp.GetRequiredService<AplicacionDbContext>());
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         services.AddScoped<IRepositorioCliente, ClienteRepositorio>();
         services.AddScoped<IRepositorioInfCobro, InformacionCRepositorio>();
 
-
+        //De Aplicacion
+        services.AddScoped<IServicioCobranza, ServicioCobranza>();
+        
         return services;
     }
     

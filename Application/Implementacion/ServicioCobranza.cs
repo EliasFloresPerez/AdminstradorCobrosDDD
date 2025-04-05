@@ -29,12 +29,13 @@ namespace Application.Implementacion
         public async Task<CResponse> AgregarInformacionCobroAsync(LinkDePago infoCobroDto)
         {
             
-            Cliente cliente = new Cliente();
-
+            Cliente? cliente = new Cliente();
+            bool existeCliente = true;
             //Verificamos que el nombre no exista en la base de datos
             cliente = await _IRepositorioCliente.ObtenerPorNombreAsync(infoCobroDto.Nombre);
             if (cliente == null)
             {
+                existeCliente = false;
                 //Creamos la entidad cliente
                 cliente = new Cliente()
                 {
@@ -53,7 +54,12 @@ namespace Application.Implementacion
             cliente.InformacionesCobro.Add(infocobro);
 
             // Guardamos el cliente y la informacion de cobro en la base de datos
-            _IRepositorioCliente.Agregar(cliente);
+            
+            if (existeCliente == false){
+                _IRepositorioCliente.Agregar(cliente);
+            }
+
+            
             await _unitOfWork.CommitAsync();
 
             return new CResponse { statusCode = 200, message = "Informacion de cobro agregada correctamente." };
@@ -85,23 +91,39 @@ namespace Application.Implementacion
             // Buscamos el cliente por su nombre
             Cliente? cliente = await _IRepositorioCliente.ObtenerPorNombreAsync(nombre);
 
+            
+
             if (cliente != null)
             {
-                // Obtenemos la informacion de cobro del cliente
-                List<LinksTotal> linksTotal = new List<LinksTotal>();
-                foreach (var infoCobro in cliente.InformacionesCobro)
-                {
-                    linksTotal.Add(new LinksTotal { Id = infoCobro.Id, Monto = infoCobro.Total, Motivo = infoCobro.Descripcion });
-                }
-                return linksTotal;
-            }
-            else
-            {
-                return new List<LinksTotal>();
-            }
-    
+                // Obtenemos la información de cobro del cliente
+                IEnumerable<InformacionCobro> infoCobroEnumerable = await _IRepositorioInfCobro.ObtenerPorClienteIdAsync(cliente.Id);
 
+                // Convertimos el IEnumerable a una lista
+                List<InformacionCobro> infoCobro = infoCobroEnumerable.ToList();
+
+                // Verificamos si se obtuvo información de cobro
+                if (infoCobro.Any()) // Puedes usar .Any() para verificar si hay elementos
+                {
+                    List<LinksTotal> linksTotal = new List<LinksTotal>();
+
+                    foreach (var item in infoCobro)
+                    {
+                        linksTotal.Add(new LinksTotal()
+                        {
+                            Nombre = cliente.Nombre,
+                            Motivo = item.Descripcion,
+                            Monto = item.Total,
+                            Id = item.Id
+                        });
+                    }
+
+                    return linksTotal;
+                }
+
+            }
+                        
+            return new List<LinksTotal>();
         }
-    }
+}
 }
         
