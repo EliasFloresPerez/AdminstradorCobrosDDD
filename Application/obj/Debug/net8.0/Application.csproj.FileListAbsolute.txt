@@ -8,7 +8,7 @@ C:\Users\elias\source\repos\ProyectoTecnico\Application\obj\Debug\net8.0\Applica
 C:\Users\elias\source\repos\ProyectoTecnico\Application\obj\Debug\net8.0\Application.AssemblyInfoInputs.cache
 C:\Users\elias\source\repos\ProyectoTecnico\Application\obj\Debug\net8.0\Application.AssemblyInfo.cs
 C:\Users\elias\source\repos\ProyectoTecnico\Application\obj\Debug\net8.0\Application.csproj.CoreCompileInputs.cache
-C:\Users\elias\source\repos\ProyectoTecnico\Application\obj\Debug\net8.0\Application.csproj.CopyComplete
+C:\Users\elias\source\repos\ProyectoTecnico\Application\obj\Debug\net8.0\Applicat.44B5EDA2.Up2Date
 C:\Users\elias\source\repos\ProyectoTecnico\Application\obj\Debug\net8.0\Application.dll
 C:\Users\elias\source\repos\ProyectoTecnico\Application\obj\Debug\net8.0\refint\Application.dll
 C:\Users\elias\source\repos\ProyectoTecnico\Application\obj\Debug\net8.0\Application.pdb

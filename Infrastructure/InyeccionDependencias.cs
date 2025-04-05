@@ -7,12 +7,12 @@ using Domain.Repositorios;
 using Infrastructure.Repositorio;
 using Infrastructure.Base;
 using Domain.Abstracto;
-using Application.Abstracto;
+
 
 using Infrastructure.Persistencia;
 
 
-namespace MoodleProject.Infrastructure;
+namespace Infrastructure;
 
 public static class InyeccionDeDependencias
 {

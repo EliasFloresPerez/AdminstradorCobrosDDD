@@ -6,23 +6,28 @@ namespace Infrastructure.Persistencia
 {
     public class AplicacionDbContext : DbContext ,IDbContext
     {
-        public AplicacionDbContext(DbContextOptions<AplicacionDbContext> options) : base(options)
+        public AplicacionDbContext(DbContextOptions options) : base(options)
         {
         }
 
-
-        public DbSet<Cliente> Clientes { get; set; } = null!;
-        public DbSet<InformacionCobro> InformacionCobros { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AplicacionDbContext).Assembly);
-            base.OnModelCreating(modelBuilder);
         }
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<InformacionCobro> InformacionCobros { get; set; }
+
+        
 
         public Task<int> SaveChangesAsync()
         {
             return base.SaveChangesAsync();
+        }
+
+        public void SetModified(object entity)
+        {
+            Entry(entity).State = EntityState.Modified;
         }
     }
 }
