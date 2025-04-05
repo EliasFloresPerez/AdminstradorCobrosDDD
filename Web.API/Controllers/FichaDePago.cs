@@ -21,19 +21,19 @@ public class FichaDePagoController : ControllerBase
 
     [HttpPost("AgregarInformacionCobro")]
 
-    public async Task<CResponse> AgregarInformacionCobro([FromBody] LinkDePago infoCobroDto)
+    public async Task<IActionResult> AgregarInformacionCobro([FromBody] LinkDePago infoCobroDto)
     {
         var response = await _servicioCobranza.AgregarInformacionCobroAsync(infoCobroDto);
+        return Ok( response.message);
 
-        return response;
     }
 
     [HttpDelete("EliminarInformacionCobro/{idInformacionCobro}")]
-    public async Task<CResponse> EliminarInformacionCobro(Guid idInformacionCobro)
+    public async Task<IActionResult> EliminarInformacionCobro(Guid idInformacionCobro)
     {
         var response = await _servicioCobranza.EliminarInformacionCobroAsync(idInformacionCobro);
         
-        return response;
+        return Ok(response.message);
 
     }
     [HttpGet("ObtenerInformacionCobroPorNombre/{nombre}")]
@@ -42,6 +42,7 @@ public class FichaDePagoController : ControllerBase
         var response = await _servicioCobranza.ObtenerInformacionCobroPorNombreAsync(nombre);
         return Ok(response);
     }
+
 }
 
 

@@ -4,7 +4,8 @@ using Application;
 using Web.API.Extensions;
 
 using Microsoft.OpenApi.Models;
-
+using Microsoft.AspNetCore.Diagnostics;
+using System.Text.Json;
 
 using System.Text;
 
@@ -52,6 +53,45 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+
+//Se puede personalidad el error para saber si viene del cliente o del servidor.
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.ContentType = "application/json";
+
+        var error = context.Features.Get<IExceptionHandlerFeature>();
+        if (error != null)
+        {
+            var exception = error.Error;
+
+            var response = new
+            {
+                statusCode = context.Response.StatusCode,
+                message = exception.Message  // Devuelve el mensaje de la excepción
+            };
+
+            
+            if (exception is ArgumentException)
+            {
+                context.Response.StatusCode = 400; 
+            }
+            else if (exception is KeyNotFoundException)
+            {
+                context.Response.StatusCode = 404; 
+            }
+            else
+            {
+                context.Response.StatusCode = 500; 
+            }
+
+            var json = JsonSerializer.Serialize(response);
+            await context.Response.WriteAsync(json);
+        }
+    });
+});
 
 app.UseSwagger();
 app.UseSwaggerUI();

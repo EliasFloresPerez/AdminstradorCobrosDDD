@@ -32,7 +32,8 @@ namespace Application.Implementacion
             //Validamos que el Monto no sea menor a 0
             if (infoCobroDto.Monto < 0)
             {
-                return new CResponse { statusCode = 400, message = "El monto no puede ser menor a 0." };
+                throw new Exception("El monto no puede ser menor a 0.");
+                
             }
 
             
@@ -89,7 +90,9 @@ namespace Application.Implementacion
             }
             else
             {
-                return new CResponse { statusCode = 404, message = "Informacion de cobro no encontrada." };
+                //return new CResponse { statusCode = 404, message = "Informacion de cobro no encontrada." };
+                //Enviamos un throw de error
+                throw new Exception("Informacion de cobro no encontrada.");
             }
         }
 
